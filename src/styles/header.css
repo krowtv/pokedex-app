@@ -1,0 +1,27 @@
+.center-header {
+	display: flex;
+	align-items: center;
+	position: relative;
+	max-width: 100%;
+}
+
+.pokemon-input {
+	font-size: 20px;
+	padding: 5px 8px;
+	width: 100%;
+	padding-right: 9px;
+	outline: none;
+	background: #353535;
+	color: #e6e6e6;
+	border: 1px solid #595959;
+	border-radius: 10px;
+	transition: .3s ease;
+}
+
+.pokemon-input:focus {
+	border: 1px solid #C71438;
+}
+
+.pokemon-input::placeholder {
+	color: #8c8c8c;
+}

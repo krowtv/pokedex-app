@@ -1,0 +1,5 @@
+.pokemon-name {
+    text-transform: uppercase;
+    font-size: 34px;
+    font-weight: bolder;
+}
