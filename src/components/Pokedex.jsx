@@ -1,34 +1,39 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { pokemonData } from '../pokeDB/pokemon_data'
+import PokeList from '../components/PokeList'
 import '../styles/pokedex.css'
 
 export default function Pokedex(props) {
-    const [notFound, setNotFound] = useState(false)
+    const pokeData = pokemonData;
 
-    const [pokeData, setPokeData] = useState({
-        name: "",
-        frontSpriteURL: ""
-    });
+    const [notFound, setNotFound] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [currPokemon, setCurrPokemon] = useState(
+        Object.values(pokeData).slice(0, 20)
+    );
+
+    function updateCurrPokemon() {
+        setCurrPokemon(prevState => prevState.concat(
+            Object.values(pokeData).slice(
+            prevState.length, prevState.length + 20
+        )))
+    }
 
     useEffect(() => {
-        if (props.formSubmit) {
-            fetch(`https://pokeapi.co/api/v2/pokemon/${props.pokemon.toLowerCase()}/`)
-            .then(res => res.json())
-            .then(pokeData => setPokeData(prevPokemon => {
-                setNotFound(false)
-                const { name, sprites } = pokeData;
-                return ({
-                    ...prevPokemon,
-                    name: name,
-                    frontSpriteURL: sprites.other['official-artwork'].front_default
-                })
-            }))
-            .catch(err => {
-                setNotFound(true)
-            })
-        }
-    }, [props.pokemon, props.formSubmit]);
+        const handleScroll = () => {
+          if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+            setIsLoading(true)
+            updateCurrPokemon();
+          }
+        };
+        window.addEventListener('scroll', handleScroll);
 
-
+        setIsLoading(false);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, [isLoading]);
+    
 
     return(
         <div className="pokedex">
@@ -39,9 +44,26 @@ export default function Pokedex(props) {
                 </div> 
                 :
                 (
-                <div className='pokemon-data'>
-                    <p className='pokemon-name'>{pokeData.name}</p>
-                    <img className='pokemon-image' src={pokeData.frontSpriteURL} />
+                <div className='pokemon-list'>
+                    <table className="pokemon-table">
+                        <thead className='pokemon-labels'>
+                            <tr>
+                            <th>Sprite</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Types</th>
+                            </tr>
+                        </thead>
+                        <tbody className='pokemon-list'>
+                        {
+                            currPokemon.map((pokemon) => {
+                                return (
+                                    <PokeList key={pokemon.id} pokemon={pokemon}/>
+                                    )
+                                })
+                        }
+                        </tbody>
+                    </table>
                 </div>
                 )
             }

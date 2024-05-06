@@ -1,5 +1,14 @@
-.pokemon-name {
-    text-transform: uppercase;
-    font-size: 34px;
-    font-weight: bolder;
+.pokedex {
+    display: flex;
+    justify-content: center;
+    margin: 1.2rem;
+}
+
+.pokemon-list {
+    gap: 16px;
+}
+
+.pokemon-table th {
+    background-color: #f4f4f4;
+    color: #333;
 }

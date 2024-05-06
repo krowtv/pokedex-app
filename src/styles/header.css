@@ -1,3 +1,7 @@
+.header {
+	width: 100%;
+}
+
 .center-header {
 	display: flex;
 	align-items: center;

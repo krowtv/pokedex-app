@@ -25,19 +25,6 @@ body {
   align-items: center;
 }
 
-.pokedex {
-  display: flex;
-  justify-content: center;
-}
-
-.pokemon-data {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 50px;
-}
-
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

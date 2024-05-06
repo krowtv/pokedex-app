@@ -1,0 +1,36 @@
+.pokemon {
+    background-color: rgb(0, 0, 0, .25);
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pokemon th, .pokemon td {
+    padding: 8px;
+    text-align: left;
+}
+
+.pokemon td:hover {
+    background-color: #5e5e5e;
+}
+
+.pokemon-data {
+}
+
+.pokemon-name {
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.pokemon-image {
+}
+
+.pokemon-types {
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.divide {
+    background-color: aliceblue;
+    width: 10px;
+    height: 110px;
+}
